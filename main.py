@@ -44,7 +44,7 @@ column1 = [
 column2 = [
     [sg.Text("Recipe details:", size=(16, 1), font=("Helvetica", 14, 'bold'))],
     [sg.Multiline(size=(180, 20), key='RECIPE_DETAILS')],
-    [sg.Text('', size=(140,2)),sg.Button("Clear"), sg.Button("Save")]
+    [sg.Text('', size=(146,2)),sg.Button("Clear"), sg.Button("Save")]
 ]
 
 info_tab = [
@@ -63,10 +63,9 @@ tab_group_layout = [[
 ]]
 
 layout = [
-    #[sg.Column([[sg.Text("Recipe Finder", font=("Helvetica", 36), justification='center')]], justification='center')],
     [sg.Column(image_column, justification='center')],
     [sg.TabGroup(tab_group_layout, size=(1000, 550), enable_events=True, key='-TABGROUP-')],
-    [sg.Button("Save"), sg.Button("Share"), sg.Button("Exit")]
+    [sg.Text('',size=(150,2)), sg.Button("Clear"), sg.Button("Exit")]
 ]
 
 
