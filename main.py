@@ -14,7 +14,7 @@ layout = [
     [sg.Multiline(default_text="", size=(40, 10), key='RECIPE_DETAILS')],
     [sg.Button("Exit")],
     [sg.Button("Save"), sg.Button("Share"), sg.Button("Exit")]
-    # Itt adhatsz hozzá további elemeket, mint például input mezők, gombok, stb.
+    # Itt adhatsz hozzá további elemeket, mint például input mezők, gombok, stb.n
 ]
 
 # Az ablak létrehozása a fentebb definiált elrendezéssel
