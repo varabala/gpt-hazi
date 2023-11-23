@@ -26,22 +26,25 @@ image_column = [
 
 
 ingredients_search_layout = [
-    [sg.Text("Enter ingredients:", size=(16, 1)), sg.InputText(size=(38, 1)), sg.Button("Add")],
+    [sg.Text("Enter ingredients:", size=(16, 1),font=("Helvetica", 10, 'bold')), sg.InputText(size=(38, 1)), sg.Button("Add")],
     [sg.Listbox(values=receptek, size=(60, 18), key='INGREDIENTS_LIST')]
 ]
 
 disliked_ingredients_search_layout = [
-    [sg.Text("Enter ingredients you don't like:", size=(25, 1)), sg.InputText(size=(28, 1)), sg.Button("Add")],
+    [sg.Text("Enter ingredients you don't like:", size=(25, 1), font=("Helvetica", 9, 'bold')), sg.InputText(size=(28, 1)), sg.Button("Add")],
     [sg.Listbox(values=receptek, size=(60, 18), key='DISLIKED_INGREDIENTS_LIST')],
-    [sg.Text('', size=(55, 1)), sg.Button("Search")]
+    [sg.Text('', size=(53, 1)), sg.Button("Search")]
 ]
 
 column1 = [
     [sg.Text("Pick a recipe:", size=(16, 1), font=("Helvetica", 14, 'bold'))],
-    [ sg.Listbox(values=receptek, size=(60, 18), key='RESULTS_LIST')]
+    [ sg.Listbox(values=receptek, size=(160, 18), key='RESULTS_LIST')]
 ]
 
-column2 = [[sg.Multiline(default_text="Recipe details:", size=(80, 20), key='RECIPE_DETAILS')]
+column2 = [
+    [sg.Text("Recipe details:", size=(16, 1), font=("Helvetica", 14, 'bold'))],
+    [sg.Multiline(size=(180, 20), key='RECIPE_DETAILS')],
+    [sg.Text('', size=(140,2)),sg.Button("Clear"), sg.Button("Save")]
 ]
 
 info_tab = [
@@ -51,7 +54,7 @@ search_tab = [[sg.Column(ingredients_search_layout, justification='center')],
               [sg.Column(disliked_ingredients_search_layout, justification='center')],
 ]
 
-result_tab = [[sg.Column(column1)], [sg.Column(column2)]]
+result_tab = [[sg.Column(column1, justification='center')], [sg.Column(column2, justification='center')]]
 
 tab_group_layout = [[
     sg.Tab('Search', search_tab),
