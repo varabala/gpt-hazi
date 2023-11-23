@@ -28,14 +28,14 @@ image_column = [
 
 
 ingredients_search_layout = [
-    [sg.Text("Enter ingredients:", size=(16, 1),font=("Helvetica", 10, 'bold')), sg.InputText(size=(38, 1)), sg.Button("Add")],
+    [sg.Text("Enter ingredients:", size=(16, 1),font=("Helvetica", 10, 'bold')), sg.InputText(size=(38, 1)), sg.Button("Add", key='ADD_INGREDIENT')],
     [sg.Listbox(values=receptek, size=(60, 18), key='INGREDIENTS_LIST')]
 ]
 
 disliked_ingredients_search_layout = [
-    [sg.Text("Enter ingredients you don't like:", size=(25, 1), font=("Helvetica", 9, 'bold')), sg.InputText(size=(28, 1)), sg.Button("Add")],
+    [sg.Text("Enter ingredients you don't like:", size=(25, 1), font=("Helvetica", 9, 'bold')), sg.InputText(size=(28, 1)), sg.Button("Add", key='ADD_DISLIKED')],
     [sg.Listbox(values=receptek, size=(60, 18), key='DISLIKED_INGREDIENTS_LIST')],
-    [sg.Text('', size=(53, 1)), sg.Button("Search")]
+    [sg.Text('', size=(53, 1)), sg.Button("Search", key='SEARCH')]
 ]
 
 column1 = [
@@ -46,7 +46,7 @@ column1 = [
 column2 = [
     [sg.Text("Recipe details:", size=(16, 1), font=("Helvetica", 14, 'bold'))],
     [sg.Multiline(size=(180, 20), key='RECIPE_DETAILS')],
-    [sg.Text('', size=(146,2)),sg.Button("Clear"), sg.Button("Save")]
+    [sg.Text('', size=(153, 2)), sg.Button("Save", key='SAVE')]
 ]
 
 info_tab = [
@@ -67,7 +67,7 @@ tab_group_layout = [[
 layout = [
     [sg.Column(image_column, justification='center')],
     [sg.TabGroup(tab_group_layout, size=(1000, 550), enable_events=True, key='-TABGROUP-')],
-    [sg.Text('',size=(150,2)), sg.Button("Clear"), sg.Button("Exit")]
+    [sg.Text('',size=(150,2)), sg.Button("Clear", key='CLEAR_SEARCH'), sg.Button("Exit")]
 ]
 
 
@@ -78,13 +78,20 @@ while True:
     event, values = window.read()
     if event == sg.WIN_CLOSED or event == 'Exit':
         break
-    elif event == 'Search':
+    elif event == 'ADD_INGREDIENT':
         # Itt végezheted el a keresési logikát és frissítheted a listát
         pass
-    elif event == 'RESULTS_LIST':
-        # A kiválasztott recept részleteinek megjelenítése
-        selected_recipe = values['RESULTS_LIST'][0]  # Például a kiválasztott recept neve
-        window['RECIPE_DETAILS'].update(f"A kiválasztott recept részletei: {selected_recipe}")
+    elif event == 'ADD_DISLIKED':
+        pass
+    elif event == 'CLEAR_SEARCH':
+        pass
+    elif event == 'SEARCH':
+        pass
+    elif event == 'CLEAR':
+        pass
+    elif event == 'SAVE':
+        pass
+
 
 window.close()
 
