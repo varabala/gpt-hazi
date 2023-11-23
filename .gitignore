@@ -1,3 +1,4 @@
 config.ini
 venv/
 responses.log
+.idea/
