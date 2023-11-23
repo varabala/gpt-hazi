@@ -5,7 +5,10 @@ from PIL import Image
 sg.theme('LightBlue2')
 
 logo_path = 'recipe_finder_logo.png'
-info_text = 'info.txt'
+info_filename = 'info.txt'
+
+with open(info_filename, 'r', encoding='utf-8') as file:
+    info_text = file.read()
 
 receptek = ["Recept 1", "Recept 2", "Recept 3"]
 
