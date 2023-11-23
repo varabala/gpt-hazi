@@ -22,7 +22,7 @@ except Exception as e:
     print(e)
 """
 
-class Recept:
+class Recipe:
     def __init__(self, id, title, instructions, image_name, ingredients):
         self.id = id
         self.title = title
@@ -38,12 +38,4 @@ class Recept:
             print(f" - {ingredient}")
 
 
-recept = Recept(
-    id=1,
-    title="Crispy Salt and Pepper Potatoes",
-    instructions="Preheat oven to 400°F and line a rimmed baking sheet with parchment...",
-    image_name="crispy-salt-and-pepper-potatoes.jpg",
-    ingredients=["2 large egg whites", "1 pound new potatoes"]
-)
 
-recept.display()
