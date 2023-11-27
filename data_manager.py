@@ -13,9 +13,15 @@ class DataManager:
         uri = f"mongodb+srv://{user}:{password}@mucimenu.pholujd.mongodb.net/?retryWrites=true&w=majority"
 
         self.client = MongoClient(uri, server_api=ServerApi('1'))
-        self.db = self.client['receptek']  # Az adatbázis neve
-        self.collection = self.db['gpt-hazi']  # A kollekció neve
+        self.db = self.client['receptek']
+        self.collection = self.db['gpt-hazi']
 
     def get_recept_by_ingredients(self, liked, disliked):
-        # Implementáld a lekérdezéseket itt
-        pass
+        query = {
+            "$and": [
+                {"Ingredients": {"$all": [re.compile(f".*{ingredient}.*", re.IGNORECASE) for ingredient in liked]}},
+                {"Ingredients": {"$nin": [re.compile(f".*{ingredient}.*", re.IGNORECASE) for ingredient in disliked]}}
+            ]
+        }
+        return list(self.collection.find(query))
+
