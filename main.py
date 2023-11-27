@@ -3,7 +3,6 @@ from PIL import Image
 import data
 
 
-
 sg.theme('LightBlue2')
 
 logo_path = 'recipe_finder_logo.png'
@@ -24,20 +23,15 @@ image.save(temp_path)
 image_column = [
     [sg.Image(temp_path)]
 ]
-
-
-
 ingredients_search_layout = [
-    [sg.Text("Enter ingredients:", size=(16, 1),font=("Helvetica", 10, 'bold')), sg.InputText(size=(38, 1)), sg.Button("Add", key='ADD_INGREDIENT')],
+    [sg.Text("Enter ingredients:", size=(16, 1),font=("Helvetica", 10, 'bold')), sg.InputText(size=(38, 1), key="INGREDIENT"), sg.Button("Add", key='ADD_INGREDIENT')],
     [sg.Listbox(values=receptek, size=(60, 18), key='INGREDIENTS_LIST')]
 ]
-
 disliked_ingredients_search_layout = [
-    [sg.Text("Enter ingredients you don't like:", size=(25, 1), font=("Helvetica", 9, 'bold')), sg.InputText(size=(28, 1)), sg.Button("Add", key='ADD_DISLIKED')],
+    [sg.Text("Enter ingredients you don't like:", size=(25, 1), font=("Helvetica", 9, 'bold')), sg.InputText(size=(28, 1), key="DISINGREDIENT"), sg.Button("Add", key='ADD_DISLIKED')],
     [sg.Listbox(values=receptek, size=(60, 18), key='DISLIKED_INGREDIENTS_LIST')],
     [sg.Text('', size=(53, 1)), sg.Button("Search", key='SEARCH')]
 ]
-
 column1 = [
     [sg.Text("Pick a recipe:", size=(16, 1), font=("Helvetica", 14, 'bold'))],
     [ sg.Listbox(values=receptek, size=(160, 18), key='RESULTS_LIST')]
@@ -79,15 +73,19 @@ while True:
     if event == sg.WIN_CLOSED or event == 'Exit':
         break
     elif event == 'ADD_INGREDIENT':
-        # Itt végezheted el a keresési logikát és frissítheted a listát
-        pass
+        ingredient = values['INGREDIENT']
+        data.ingredients.append(ingredient)
+        window['INGREDIENT'].update('')
     elif event == 'ADD_DISLIKED':
-        pass
+        ingredient = values['DISINGREDIENT']
+        data.disliked_ingredients.append(ingredient)
+        window['INGREDIENT'].update('')
     elif event == 'CLEAR_SEARCH':
-        pass
+        window['INGREDIENTS_LIST'].update([])
+        window['DISLIKED_INGREDIENTS_LIST'].update([])
+        window['RESULTS_LIST'].update([])
+        window['RECIPE_DETAILS'].update([])
     elif event == 'SEARCH':
-        pass
-    elif event == 'CLEAR':
         pass
     elif event == 'SAVE':
         pass

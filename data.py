@@ -1,6 +1,7 @@
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import configparser
+import re
 
 config = configparser.ConfigParser()
 config.read('config.ini')
@@ -20,11 +21,7 @@ try:
     print("Pinged your deployment. You successfully connected to MongoDB!")
 except Exception as e:
     print(e)
-'''print(db.list_collection_names())
-for doc in collection.find({}):
-    print(doc)
 
-print(list(collection.find({})))'''
 
 class Recipe:
     def __init__(self, id, title, instructions, image_name, ingredients):
@@ -41,31 +38,17 @@ class Recipe:
         for ingredient in self.ingredients:
             print(f" - {ingredient}")
 
-ingredients = ["chicken"]
-
-disliked_ingredients = ['paprika']
 
 
-query = {
-    "$and": [
-        {"Ingredients": {"$in": ingredients}},
-        {"Ingredients": {"$nin": disliked_ingredients}}
-    ]
-}
-query = {
-    "ingredients": {
-        "$in": ingredients
-    },
-    "$not": {
-        "ingredients": {
-            "$in": disliked_ingredients
-        }
+
+ingredients = []
+disliked_ingredients = ['paprika', 'acorn', 'sausage']
+
+results = collection.find({
+    "Ingredients": {
+        "$all": [re.compile(f".*{ingredient}.*", re.IGNORECASE) for ingredient in ingredients],
+        "$nin": [re.compile(f".*{ingredient}.*", re.IGNORECASE) for ingredient in disliked_ingredients]
     }
-}
+})
 
-# A találatok lekérése
-results = recipes.find(query)
-
-# A találatok megjelenítése
-for result in results:
-    print(result)
+#print(list(results)[0]['Title'])
