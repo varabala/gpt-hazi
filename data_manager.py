@@ -25,3 +25,8 @@ class DataManager:
         }
         return list(self.collection.find(query))
 
+
+
+liked = ["chicken", "pasta"]
+disliked = ["tomato"]
+print(DataManager().get_recept_by_ingredients(liked, disliked))

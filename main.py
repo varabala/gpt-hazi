@@ -7,8 +7,15 @@ import data_manager
 class MainApplication:
     def __init__(self):
         self.data_manager = DataManager()
+        self.ingredients = []
+        self.disliked_ingredients = []
+        self.results = []
         self.setup_window()
-
+    def update_recipe_list(self):
+        liked = self.ingredients
+        disliked = self.disliked_ingredients
+        recipes = self.data_manager.get_recept_by_ingredients(liked, disliked)
+        self.window['RESULTS_LIST'].update(recipes)
     def setup_window(self):
         sg.theme('LightBlue2')
 
@@ -18,7 +25,7 @@ class MainApplication:
         with open(info_filename, 'r', encoding='utf-8') as file:
             info_text = file.read()
 
-        receptek = ["Recept 1", "Recept 2", "Recept 3"]
+
 
         image = Image.open(logo_path)
         image.thumbnail((130, 130))
@@ -31,17 +38,17 @@ class MainApplication:
         ingredients_search_layout = [
             [sg.Text("Enter ingredients:", size=(16, 1), font=("Helvetica", 10, 'bold')),
              sg.InputText(size=(38, 1), key="INGREDIENT"), sg.Button("Add", key='ADD_INGREDIENT')],
-            [sg.Listbox(values=receptek, size=(60, 18), key='INGREDIENTS_LIST')]
+            [sg.Listbox(values=self.ingredients, size=(60, 18), key='INGREDIENTS_LIST')]
         ]
         disliked_ingredients_search_layout = [
             [sg.Text("Enter ingredients you don't like:", size=(25, 1), font=("Helvetica", 9, 'bold')),
              sg.InputText(size=(28, 1), key="DISINGREDIENT"), sg.Button("Add", key='ADD_DISLIKED')],
-            [sg.Listbox(values=receptek, size=(60, 18), key='DISLIKED_INGREDIENTS_LIST')],
+            [sg.Listbox(values=self.disliked_ingredients, size=(60, 18), key='DISLIKED_INGREDIENTS_LIST')],
             [sg.Text('', size=(53, 1)), sg.Button("Search", key='SEARCH')]
         ]
         column1 = [
             [sg.Text("Pick a recipe:", size=(16, 1), font=("Helvetica", 14, 'bold'))],
-            [sg.Listbox(values=receptek, size=(160, 18), key='RESULTS_LIST')]
+            [sg.Listbox(values=self.results, size=(160, 18), key='RESULTS_LIST')]
         ]
 
         column2 = [
@@ -80,19 +87,21 @@ class MainApplication:
                 break
             elif event == 'ADD_INGREDIENT':
                 ingredient = values['INGREDIENT']
-                data_manager.ingredients.append(ingredient)
+                self.ingredients.append(ingredient)
                 self.window['INGREDIENT'].update('')
+                self.window['INGREDIENTS_LIST'].update(self.ingredients)
             elif event == 'ADD_DISLIKED':
                 disliked_ingredient = values['DISINGREDIENT']
-                data_manager.disliked_ingredients.append(disliked_ingredient)
+                self.disliked_ingredients.append(disliked_ingredient)
                 self.window['INGREDIENT'].update('')
+                self.window['DISLIKED_INGREDIENTS_LIST'].update(self.disliked_ingredients)
             elif event == 'CLEAR_SEARCH':
                 self.window['INGREDIENTS_LIST'].update([])
                 self.window['DISLIKED_INGREDIENTS_LIST'].update([])
                 self.window['RESULTS_LIST'].update([])
                 self.window['RECIPE_DETAILS'].update([])
             elif event == 'SEARCH':
-                pass
+                self.update_recipe_list()
             elif event == 'SAVE':
                 pass
 
