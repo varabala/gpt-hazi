@@ -5,21 +5,29 @@ This application helps you find recipes based on the ingredients you like or dis
 Instructions:
 
 1. Search Tab:
-   - In the "Enter ingredients" field, type the ingredients you have or like.
-   - Click "Add" to add the ingredient to your search list.
-   - In the "Enter the ingredients you don't like" field, type the ingredients you want to avoid.
-   - Click "Add" to add these ingredients to your exclusion list.
-   - Your lists will appear in the two large boxes below the input fields.
+
+In the "Enter ingredients" field, type the ingredients you have or like and click "Add" to include them in your search.
+In the "Enter the ingredients you don't like" field, type the ingredients you wish to avoid and click "Add" to add them to your exclusion list.
+The ingredients you like and dislike will appear in the corresponding list boxes below the input fields.
+Once you have added all your preferred and disliked ingredients, click the "Search" button. The app will then search for recipes that match your criteria.
 
 2. Results Tab:
-   - After entering your preferences, click the "Search" button. This will populate the "Results" list with recipes that match your criteria.
-   - Click on any recipe in the "Results" list to view its details in the "Recipe details" section.
 
-3. Saving and Sharing:
-   - Once you have found a recipe you like, you can use the "Save" button to save the recipe for later.
-   - Use the "Share" button to share the recipe with friends or on social media.
+After conducting a search, the "Results" list will be populated with recipe titles that match your criteria.
+Click on any recipe title in the "Results" list to view its detailed instructions and ingredients in the "Recipe details" section.
+You can clear the search results and start a new search anytime by clicking the "Clear" button.
 
-4. Exiting the App:
-   - When you are finished, click the "Exit" button to close the application.
+3. Recipe Details:
 
-Enjoy your cooking adventure with the Recipe Finder App!
+The "Recipe details" section displays the cooking instructions and ingredients of the selected recipe.
+You can save the currently displayed recipe by clicking the "Save" button.
+
+4. Info Tab:
+
+Visit the Info tab for instructions and helpful information about using the app.
+
+5. Exiting the App:
+
+When you are finished, click the "Exit" button to close the application.
+Enjoy your culinary adventure with the Recipe Finder App!
+

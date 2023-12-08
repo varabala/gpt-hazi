@@ -7,7 +7,7 @@ class Recipe:
         self.ingredients = ingredients
 
     def display(self):
-        print(f"Cím: {self.title}")
+        print(self.title)
         print(f"Utasítások: {self.instructions}")
         print("Hozzávalók:")
         for ingredient in self.ingredients:

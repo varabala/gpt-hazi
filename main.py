@@ -10,12 +10,20 @@ class MainApplication:
         self.ingredients = []
         self.disliked_ingredients = []
         self.results = []
+        self.recipes = []
         self.setup_window()
+
     def update_recipe_list(self):
         liked = self.ingredients
         disliked = self.disliked_ingredients
         recipes = self.data_manager.get_recept_by_ingredients(liked, disliked)
-        self.window['RESULTS_LIST'].update(recipes)
+        self.recipes = [
+            Recipe(recipe['ID'], recipe['Title'], recipe['Instructions'], recipe['Image_Name'], recipe['Ingredients'])
+            for recipe in recipes]
+        recipe_titles = [recipe.title for recipe in self.recipes]
+        self.window['RESULTS_LIST'].update(recipe_titles)
+
+
     def setup_window(self):
         sg.theme('LightBlue2')
 
@@ -24,8 +32,6 @@ class MainApplication:
 
         with open(info_filename, 'r', encoding='utf-8') as file:
             info_text = file.read()
-
-
 
         image = Image.open(logo_path)
         image.thumbnail((130, 130))
@@ -48,12 +54,12 @@ class MainApplication:
         ]
         column1 = [
             [sg.Text("Pick a recipe:", size=(16, 1), font=("Helvetica", 14, 'bold'))],
-            [sg.Listbox(values=self.results, size=(160, 18), key='RESULTS_LIST')]
+            [sg.Listbox(values=self.results, size=(160, 18), key='RESULTS_LIST', enable_events=True)]
         ]
 
         column2 = [
             [sg.Text("Recipe details:", size=(16, 1), font=("Helvetica", 14, 'bold'))],
-            [sg.Multiline(size=(180, 20), key='RECIPE_DETAILS')],
+            [sg.Multiline(size=(180, 20),font=("Helvetica", 12, 'italic'), key='RECIPE_DETAILS')],
             [sg.Text('', size=(153, 2)), sg.Button("Save", key='SAVE')]
         ]
 
@@ -102,8 +108,15 @@ class MainApplication:
                 self.window['RECIPE_DETAILS'].update([])
             elif event == 'SEARCH':
                 self.update_recipe_list()
-            elif event == 'SAVE':
-                pass
+
+            elif event == 'RESULTS_LIST':
+                if values['RESULTS_LIST']:  # Check if an item is selected
+                    selected_title = values['RESULTS_LIST'][0]
+                    selected_recipe = next((recipe for recipe in self.recipes if recipe.title == selected_title), None)
+                    if selected_recipe is not None:
+                        recipe_details = f"Instructions: {selected_recipe.instructions}\n\nIngredients: {selected_recipe.ingredients}"
+                        self.window['RECIPE_DETAILS'].update(recipe_details)
+
 
 if __name__ == "__main__":
     app = MainApplication()
