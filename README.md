@@ -1,4 +1,4 @@
-#Recipe Finder App (H1)
+Recipe Finder App 
 
 **Projektleírás**
 
