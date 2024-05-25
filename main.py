@@ -3,6 +3,7 @@ from PIL import Image
 from data_manager import DataManager
 from recipe import Recipe
 import data_manager
+from recipe_recommender import get_user_preferences, recommend_recipes
 
 class MainApplication:
     def __init__(self):
@@ -119,5 +120,7 @@ class MainApplication:
 
 
 if __name__ == "__main__":
+    preferences = get_user_preferences()
+    recommend_recipes(preferences)
     app = MainApplication()
     app.run()
